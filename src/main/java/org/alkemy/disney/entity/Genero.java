@@ -1,9 +1,12 @@
 package org.alkemy.disney.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Genero {
+@Table(name = "genero")
+public class Genero implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idGenero")
@@ -12,15 +15,6 @@ public class Genero {
     private String nombre;
 
     private String urlImagen;
-
-    public Genero() {
-    }
-
-    public Genero(Long id, String nombre, String urlImagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.urlImagen = urlImagen;
-    }
 
     public Long getId() {
         return id;

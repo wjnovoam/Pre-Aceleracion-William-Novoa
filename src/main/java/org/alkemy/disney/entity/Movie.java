@@ -1,10 +1,12 @@
 package org.alkemy.disney.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Movie {
+@Table(name = "movie")
+public class Movie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,16 +22,6 @@ public class Movie {
 
     private double calificacion;
 
-    public Movie() {
-    }
-
-    public Movie(Long id, String urlImagen, String titulo, Date fechaCreacion, double calificacion) {
-        this.id = id;
-        this.urlImagen = urlImagen;
-        this.titulo = titulo;
-        this.fechaCreacion = fechaCreacion;
-        this.calificacion = calificacion;
-    }
 
     public Long getId() {
         return id;

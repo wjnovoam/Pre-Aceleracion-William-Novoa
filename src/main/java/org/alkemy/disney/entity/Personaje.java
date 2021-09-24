@@ -1,8 +1,10 @@
 package org.alkemy.disney.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
+@Table(name = "personaje")
 public class Personaje {
 
     @Id
@@ -10,8 +12,10 @@ public class Personaje {
     @Column(name = "idPersonaje")
     private Long id;
 
+    @NotEmpty
     private String urlImagen;
 
+    @NotEmpty
     private String nombre;
 
     private String edad;
@@ -19,19 +23,6 @@ public class Personaje {
     private String peso;
 
     private String historia;
-
-    public Personaje() {
-
-    }
-
-    public Personaje(Long id, String urlImagen, String nombre, String edad, String peso, String historia) {
-        this.id = id;
-        this.urlImagen = urlImagen;
-        this.nombre = nombre;
-        this.edad = edad;
-        this.peso = peso;
-        this.historia = historia;
-    }
 
     public Long getId() {
         return id;
