@@ -2,8 +2,8 @@ create database dbdisney;
 use dbdisney;
 
 create table personaje(
-	idPersonaje bigint primary key not null auto_increment,
-	urlImagen varchar(255),
+	id_personaje bigint primary key not null auto_increment,
+	url_imagen varchar(255),
 	nombre varchar(100) not null,
 	edad int,
 	peso int,
@@ -11,39 +11,39 @@ create table personaje(
 );
 
 create table movie(
-	idMovie bigint primary key not null auto_increment,
-	urlImagen varchar(255),
+	id_movie bigint primary key not null auto_increment,
+	url_imagen varchar(255),
 	titulo varchar(255) not null,
-	fechaCreacion date not null,
+	fecha_creacion date not null,
 	calificacion double not null check (calificacion > 0 and calificacion <=5)
 );
 
 create table genero(
-	idGenero bigint primary key not null auto_increment,
+	id_genero bigint primary key not null auto_increment,
 	nombre varchar(100) not null,
-	urlImagen varchar(255)
+	url_imagen varchar(255)
 );
 
 create table movie_personaje(
-	idPersonajeMovie int primary key not null auto_increment,
-	idMovie bigint not null,
-	idPersonaje bigint not null,
-	foreign key(idMovie) references movie(idMovie),
-	foreign key(idPersonaje) references personaje(idPersonaje),
-    	unique(idMovie, idPersonaje)
+	id_personaje_movie int primary key not null auto_increment,
+	id_movie bigint not null,
+	id_personaje bigint not null,
+	foreign key(id_movie) references movie(id_movie),
+	foreign key(id_personaje) references personaje(id_personaje),
+    unique(id_movie, id_personaje)
 );
 
 create table movie_genero(
-	idMovieGenero int primary key not null auto_increment,
-	idMovie bigint not null,
-	idGenero bigint not null,
-	foreign key(idMovie) references movie(idMovie),
-	foreign key(idGenero) references genero(idGenero),
-    	unique(idMovie, idGenero)
+	id_movie_genero int primary key not null auto_increment,
+	id_movie bigint not null,
+	id_genero bigint not null,
+	foreign key(id_movie) references movie(id_movie),
+	foreign key(id_genero) references genero(id_genero),
+    	unique(id_movie, id_genero)
 );
 
 create table usuario(
-	idUsuario bigint primary key not null auto_increment,
+	id_usuario bigint primary key not null auto_increment,
 	nombre varchar(50),
 	apellido varchar(50),
 	telefono varchar(50),
