@@ -1,7 +1,8 @@
 package org.alkemy.disney.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "personaje")
@@ -22,6 +23,9 @@ public class Personaje {
     private String peso;
 
     private String historia;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personajes")
+    private Set<Movie> movies = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -69,5 +73,13 @@ public class Personaje {
 
     public void setHistoria(String historia) {
         this.historia = historia;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

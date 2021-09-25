@@ -28,10 +28,18 @@ public class Movie implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "movie_genero",
-            joinColumns = {@JoinColumn(name = "idMovie")},
-            inverseJoinColumns = {@JoinColumn(name = "idGenero")}
+            joinColumns = {@JoinColumn(name = "id_movie")},
+            inverseJoinColumns = {@JoinColumn(name = "id_genero")}
     )
     private Set<Genero> generos = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "movie_personaje",
+            joinColumns = {@JoinColumn(name = "id_movie")},
+            inverseJoinColumns = {@JoinColumn(name = "id_personaje")}
+    )
+    private Set<Personaje> personajes = new HashSet<>();
+
 
 
     public Long getId() {
@@ -80,5 +88,13 @@ public class Movie implements Serializable {
 
     public void setGeneros(Set<Genero> generos) {
         this.generos = generos;
+    }
+
+    public Set<Personaje> getPersonajes() {
+        return personajes;
+    }
+
+    public void setPersonajes(Set<Personaje> personajes) {
+        this.personajes = personajes;
     }
 }
