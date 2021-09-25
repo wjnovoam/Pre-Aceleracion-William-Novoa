@@ -2,6 +2,8 @@ package org.alkemy.disney.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "genero")
@@ -9,12 +11,16 @@ public class Genero implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idGenero")
+    @Column(name = "id_genero")
     private Long id;
 
     private String nombre;
 
+    @Column(name = "url_imagen")
     private String urlImagen;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "generos")
+    private Set<Movie> movies = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -38,5 +44,13 @@ public class Genero implements Serializable {
 
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

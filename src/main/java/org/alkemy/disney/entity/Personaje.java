@@ -9,13 +9,12 @@ public class Personaje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idPersonaje")
+    @Column(name = "id_personaje")
     private Long id;
 
-    @NotEmpty
+    @Column(name = "url_imagen")
     private String urlImagen;
 
-    @NotEmpty
     private String nombre;
 
     private String edad;
