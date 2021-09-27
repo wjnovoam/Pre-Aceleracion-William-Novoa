@@ -1,8 +1,9 @@
 package org.alkemy.disney.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "personaje")
@@ -16,16 +17,21 @@ public class Personaje {
     @Column(name = "url_imagen")
     private String urlImagen;
 
+    @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "edad")
     private String edad;
 
+    @Column(name = "peso")
     private String peso;
 
+    @Column(name = "historia")
     private String historia;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personajes")
-    private Set<Movie> movies = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "personajes")
+        private List<Movie> movies;
 
     public Long getId() {
         return id;
@@ -75,11 +81,11 @@ public class Personaje {
         this.historia = historia;
     }
 
-    public Set<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
 }

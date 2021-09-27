@@ -12,14 +12,19 @@ public class Usuario implements Serializable {
     @Column(name = "id_usuario")
     private Long id;
 
+    @Column(name = "nombre")
     private String nombre;
 
+    @Column(name = "apellido")
     private String apellido;
 
+    @Column(name = "telefono")
     private String telefono;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "contrasena")
     private String contrasena;
 
     public Long getId() {

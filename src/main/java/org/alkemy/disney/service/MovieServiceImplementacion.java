@@ -5,6 +5,7 @@ import org.alkemy.disney.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieServiceImplementacion implements MovieService {
@@ -26,8 +27,8 @@ public class MovieServiceImplementacion implements MovieService {
     }
 
     @Override
-    public Movie consultarMovie(Long id) {
-        return null;
+    public Optional<Movie> consultarMovie(Long id) {
+        return movieRepository.findById(id);
     }
 
     @Override

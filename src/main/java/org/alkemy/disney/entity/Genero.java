@@ -1,26 +1,31 @@
 package org.alkemy.disney.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "genero")
-public class Genero implements Serializable {
+public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_genero")
     private Long id;
 
+    @Column(name = "nombre")
     private String nombre;
 
     @Column(name = "url_imagen")
     private String urlImagen;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "generos")
-    private Set<Movie> movies = new HashSet<>();
+    private List<Movie> movies;
 
     public Long getId() {
         return id;
@@ -46,11 +51,5 @@ public class Genero implements Serializable {
         this.urlImagen = urlImagen;
     }
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
 
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
-    }
 }

@@ -1,14 +1,15 @@
 package org.alkemy.disney.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "movie")
-public class Movie implements Serializable {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,12 +19,14 @@ public class Movie implements Serializable {
     @Column(name = "url_imagen")
     private String urlImagen;
 
+    @Column(name = "titulo")
     private String titulo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
+    @Column(name= "calificacion")
     private double calificacion;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -31,15 +34,14 @@ public class Movie implements Serializable {
             joinColumns = {@JoinColumn(name = "id_movie")},
             inverseJoinColumns = {@JoinColumn(name = "id_genero")}
     )
-    private Set<Genero> generos = new HashSet<>();
+    private List<Genero> generos;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "movie_personaje",
             joinColumns = {@JoinColumn(name = "id_movie")},
             inverseJoinColumns = {@JoinColumn(name = "id_personaje")}
     )
-    private Set<Personaje> personajes = new HashSet<>();
-
+    private List<Personaje> personajes;
 
 
     public Long getId() {
@@ -82,19 +84,20 @@ public class Movie implements Serializable {
         this.calificacion = calificacion;
     }
 
-    public Set<Genero> getGeneros() {
+    public List<Genero> getGeneros() {
         return generos;
     }
 
-    public void setGeneros(Set<Genero> generos) {
+    public void setGeneros(List<Genero> generos) {
         this.generos = generos;
     }
 
-    public Set<Personaje> getPersonajes() {
+    public List<Personaje> getPersonajes() {
         return personajes;
     }
 
-    public void setPersonajes(Set<Personaje> personajes) {
+    public void setPersonajes(List<Personaje> personajes) {
         this.personajes = personajes;
     }
+
 }
