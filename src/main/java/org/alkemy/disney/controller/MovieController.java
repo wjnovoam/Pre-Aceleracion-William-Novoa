@@ -1,8 +1,9 @@
 package org.alkemy.disney.controller;
 
 import org.alkemy.disney.entity.Movie;
-import org.alkemy.disney.service.MovieService;
+import org.alkemy.disney.service.interfaces.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,27 +11,40 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("api/movies")
+@CrossOrigin("*")
 public class MovieController {
 
-    @Autowired
-    MovieService movieService;
+    IMovieService iMovieService;
+
+    public MovieController(IMovieService iMovieService) {
+        this.iMovieService = iMovieService;
+    }
 
     @GetMapping
-    public ResponseEntity<?> peliculasAll(){
-        List<?> list = movieService.moviesAll();
-
-        return ResponseEntity.ok(list);
+    public ResponseEntity<?> findAllMovie(){
+        List<?> list = iMovieService.moviesAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/{id-movie}")
-    public ResponseEntity<?> consultarMovie(@PathVariable(value = "id-movie") Long id){
-        Optional<Movie> oMovie = movieService.consultarMovie(id);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findIdMovie(@PathVariable Long id){
+        Optional<Movie> oMovie = iMovieService.getMovieId(id);
         if(oMovie.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        return ResponseEntity.ok(oMovie);
+        return new ResponseEntity<>(oMovie, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateMovie(@PathVariable Long id, @RequestBody Movie movie){
+        return new ResponseEntity<>(iMovieService.updateMovie(id, movie), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMovie(@PathVariable Long id){
+        iMovieService.deleteMovie(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
