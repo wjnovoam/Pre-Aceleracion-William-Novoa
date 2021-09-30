@@ -1,58 +1,57 @@
 create database dbdisney;
 use dbdisney;
 
-create table personaje(
-	id_personaje bigint primary key not null auto_increment,
-	url_imagen varchar(255),
-	nombre varchar(100) not null,
-	edad int,
-	peso int,
-	historia varchar(255)
+create table characters(
+	id_character bigint primary key not null auto_increment,
+	url_image varchar(255), 
+	name varchar(100) not null,
+	age int,
+	weight int,
+	history varchar(255)
 );
 
 create table movie(
 	id_movie bigint primary key not null auto_increment,
-	url_imagen varchar(255),
-	titulo varchar(255) not null,
-	fecha_creacion date not null,
-	calificacion double not null check (calificacion > 0 and calificacion <=5)
+	url_image varchar(255),
+	title varchar(255) not null,
+	date_creation date not null,
+	qualification double not null check (qualification > 0 and qualification <=5)
 );
 
-create table genero(
-	id_genero bigint primary key not null auto_increment,
-	nombre varchar(100) not null,
-	url_imagen varchar(255)
+create table gender(
+	id_gender bigint primary key not null auto_increment,
+	name varchar(100) not null,
+	url_image varchar(255)
 );
 
-create table movie_personaje(
-	id_personaje_movie int primary key not null auto_increment,
+create table movie_characters(
+	id_character_movie int primary key not null auto_increment,
 	id_movie bigint not null,
-	id_personaje bigint not null,
+	id_character bigint not null,
 	foreign key(id_movie) references movie(id_movie),
-	foreign key(id_personaje) references personaje(id_personaje),
-    unique(id_movie, id_personaje)
+	foreign key(id_character) references characters(id_character),
+    unique(id_movie, id_character)
 );
 
-create table movie_genero(
-	id_movie_genero int primary key not null auto_increment,
+create table movie_gender(
+	id_movie_gender int primary key not null auto_increment,
 	id_movie bigint not null,
-	id_genero bigint not null,
+	id_gender bigint not null,
 	foreign key(id_movie) references movie(id_movie),
-	foreign key(id_genero) references genero(id_genero),
-    	unique(id_movie, id_genero)
+	foreign key(id_gender) references gender(id_gender),
+    	unique(id_movie, id_gender)
 );
 
-create table usuario(
-	id_usuario bigint primary key not null auto_increment,
-	nombre varchar(50),
-	apellido varchar(50),
-	telefono varchar(50),
+create table user(
+	id_user bigint primary key not null auto_increment,
+	first_name varchar(50),
+	last_name varchar(50),
 	email varchar(100) unique not null,
-	contrasena varchar(255)
+	password varchar(255)
 );
 
 
-insert into personaje 
+insert into characters 
 values
 (1, "https://es.web.img2.acsta.net/r_1920_1080/pictures/15/07/27/12/24/137619.jpg", "samuel Leroy jackson", 70, 85, "Nacido en Washington DC, Samuel L. Jackson ingresó en el Morehouse College de Atlanta para comenzar a estudiar arquitectura. Hizo su debut en el cine en 1972 con 'Together for days'. Fue en Nueva York, donde Samuel "),
 (2, "https://es.web.img3.acsta.net/r_1920_1080/medias/nmedia/18/35/19/45/20528617.jpg", "jude law", 48, 75, "Después de una breve carrera en televisión y en el teatro, Jude Law se inicia en la gran pantalla en 1994 con el filme de ciencia ficción 'Shopping."),
@@ -66,7 +65,7 @@ values
 (2, "https://es.web.img3.acsta.net/r_1920_1080/pictures/21/06/10/17/59/2662839.jpg", "free cuy", "2021-08-18", 4.6),
 (3, "https://es.web.img3.acsta.net/r_1920_1080/medias/nmedia/18/68/51/20/19095268.jpg", "la proposicion", "2009-07-10", 3.4);
 
-insert into genero
+insert into gender
 values
 (1, "accion", "url"),
 (2, "fantasia", "url"),
@@ -75,7 +74,7 @@ values
 (5, "suspense", "url"),
 (6, "espionaje", "url");
 
-insert into movie_genero
+insert into movie_gender
 values
 (1, 1, 1),
 (2, 1, 3),
@@ -85,7 +84,7 @@ values
 (6, 3, 6),
 (7, 3, 5);
 
-insert into movie_personaje
+insert into movie_characters
 values
 (1, 1, 1),
 (2, 1, 2),
@@ -95,10 +94,10 @@ values
 (6, 3, 4),
 (7, 3, 5);
 
-insert into usuario
+insert into user
 values
-(1, "william", "novoa", "3162471460", "prueba1@gmail.com", "1234"),
-(2, "johan", "melendrez", "3182233060", "prueba2@gmail.com", "1234");
+(1, "william", "novoa","prueba1@gmail.com", "1234"),
+(2, "johan", "melendrez","prueba2@gmail.com", "1234");
 
 
 
