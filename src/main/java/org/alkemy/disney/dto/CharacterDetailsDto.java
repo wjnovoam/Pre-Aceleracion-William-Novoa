@@ -10,7 +10,7 @@ public class CharacterDetailsDto implements Serializable {
     private Long id;
     private String urlImage;
     private String name;
-    private String age;
+    private Integer age;
     private String weight;
     private String history;
     @JsonIgnoreProperties({"characters", "genders"})
@@ -40,11 +40,11 @@ public class CharacterDetailsDto implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

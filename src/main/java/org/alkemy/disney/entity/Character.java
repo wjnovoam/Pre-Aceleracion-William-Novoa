@@ -22,7 +22,7 @@ public class Character implements Serializable {
     private String name;
 
     @Column(name = "age")
-    private String age;
+    private Integer age;
 
     @Column(name = "weight")
     private String weight;
@@ -37,15 +37,7 @@ public class Character implements Serializable {
     public Character() {
     }
 
-    public Character(Long id, String urlImage, String name, String age, String weight, String history, List<Movie> movies) {
-        this.id = id;
-        this.urlImage = urlImage;
-        this.name = name;
-        this.age = age;
-        this.weight = weight;
-        this.history = history;
-        this.movies = movies;
-    }
+
 
     public Long getId() {
         return id;
@@ -71,11 +63,11 @@ public class Character implements Serializable {
         this.name = name;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
